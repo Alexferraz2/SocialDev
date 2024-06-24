@@ -11,7 +11,7 @@
 - Instalar a biblioteca babel com o comando `npm i babel-plugin-styled-components@2.0.6 --save-dev`
 - Site do babel: `https://babeljs.io/`
 - Criar um arquivo com o nome de `.babelrc` e dentro do arquivo criar um objeto da seguinte forma `{"presets": ["next/babel"], "plugins": [["styled-components", {"ssr": true}]]}`
-- 
+
 
     
     
