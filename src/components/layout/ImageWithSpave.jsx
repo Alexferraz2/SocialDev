@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-const WIDTH_BREAKE = '600px'
+
+const WIDTH_BREAKE = '700px'
 
 const StyledFlex = styled.div`
     display: flex;
@@ -23,11 +24,13 @@ const StyledImage = styled.div`
 const StyledContainer = styled.div`
     background: blue;
     background-color: #fff;
-    padding: 30px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     
     @media(min-width: ${WIDTH_BREAKE}) {
-        width: 100%;
-        min-width: calc(${WIDTH_BREAKE} - 60px) 
+        width: calc(${WIDTH_BREAKE} - 100px) 
     }
 
     @media(max-width: ${WIDTH_BREAKE}) {
@@ -54,3 +57,9 @@ ImageWithSpace.defaultProps = {
 }
 
 export default ImageWithSpace;
+
+
+
+
+
+
