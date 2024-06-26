@@ -23,7 +23,7 @@ const StyledImage = styled.div`
 
 const StyledContainer = styled.div`
     background: blue;
-    background-color: #fff;
+    background-color: ${props => props.theme.white};
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
