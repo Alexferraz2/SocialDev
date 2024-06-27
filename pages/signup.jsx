@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Link from "next/link"
+import Link from 'next/link'
 
 import ImageWithSpace from "../src/components/layout/ImageWithSpave";
 import H1 from "../src/components/typography/H1";
@@ -23,21 +23,23 @@ const Text = styled.p`
     
 `
 
-function LoginPage() {
+function Signup() {
     return (
         <ImageWithSpace>
             <H1># Social Dev</H1>
             <H4>Tudo que acontece no mundo dev, está aqui!</H4>  
             <FormContainer>
-                <H2>Entre em sua conta</H2>
+                <H2>Crie sua conta</H2>
             </FormContainer>  
             <Form>
+                <Input type="text" label="Nome"/> 
+                <Input type="text" label="Sobrenome"/> 
                 <Input type="email" label="Email ou usuário"/>   
                 <Input type="password" label="Senha"/> 
                 <Button>Entrar</Button>
                 
             </Form>
-            <Text>Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link> </Text>       
+            <Text>Já possui uma conta? <Link href="/login">Faça seu login</Link> </Text>       
             
             
             
@@ -46,4 +48,4 @@ function LoginPage() {
 }
 
 
-export default LoginPage;
+export default Signup;
