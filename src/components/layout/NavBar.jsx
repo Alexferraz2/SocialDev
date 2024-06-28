@@ -8,6 +8,10 @@ const StyledNavbar = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 100px;
+
+    @media(max-width: 500px) {
+        padding: 0 20px;
+    }
 `
 const StyledLogo = styled.span `
     font-weight: bold;
