@@ -1,4 +1,4 @@
-import connect from 'next-connect'
+import creatHandler from '../../../lib/middlewares/nextConnect';
 
 import Joi from 'joi';
 
@@ -15,8 +15,9 @@ const postSchema = Joi.object({
 
 })
 
-const signup = connect()
- .post(validate({ body:postSchema }), (req, res) => {
+const signup = creatHandler()
+ 
+signup.post(validate({ body: postSchema }), (req, res) => {
     console.log(req.body.firstName)
     signupUser(req.body)
     res.status(200).json( {teste: "OK"} )

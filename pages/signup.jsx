@@ -34,7 +34,7 @@ function Signup() {
             <Form>
                 <Input type="text" label="Nome"/> 
                 <Input type="text" label="Sobrenome"/> 
-                <Input type="email" label="Email ou usuário"/>   
+                <Input type="email" label="Email"/>   
                 <Input type="password" label="Senha"/> 
                 <Button>Entrar</Button>
                 
