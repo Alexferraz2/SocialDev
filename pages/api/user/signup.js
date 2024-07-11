@@ -17,10 +17,16 @@ const postSchema = Joi.object({
 
 const signup = creatHandler()
  
-signup.post(validate({ body: postSchema }), (req, res) => {
-    console.log(req.body.firstName)
-    signupUser(req.body)
-    res.status(200).json( {teste: "OK"} )
+signup.post(validate({ body: postSchema }), async (req, res) => {
+
+    try{
+        const user = await signupUser(req.body)
+        res.status(200).json( user )
+    }catch(error) {
+        console.error(error)
+        throw error
+    }
+    
  })
 
 
