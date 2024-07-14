@@ -13,10 +13,10 @@ export const signupUser = async (body) => {
         throw error
     }
 
-    
-    
-    
-} 
+
+
+
+}
 
 export const login = async (body) => {
     try {
@@ -27,12 +27,12 @@ export const login = async (body) => {
             ]
         })
 
-        if(!user) throw new Error('Not found')
+        if (!user) throw new Error('Not found')
         const passwordIsCorrect = comparePassword(body.password, user.password)
-        if(!passwordIsCorrect) throw new Error('Password is incorrect')
-        
+        if (!passwordIsCorrect) throw new Error('Password is incorrect')
+
         return user
     } catch (error) {
-      throw error
+        throw error
     }
 }
