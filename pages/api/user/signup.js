@@ -1,10 +1,13 @@
 import creatHandler from '../../../lib/middlewares/nextConnect';
+import { withIronSessionApiRoute } from 'iron-session/next';
 
 import Joi from 'joi';
 
 import validate from '../../../lib/middlewares/validation'
 
 import { signupUser } from "../../../modules/user/user.service";
+
+import { ironConfig } from '../../../lib/middlewares/ironSession';
 
 const postSchema = Joi.object({
     firstName: Joi.string().required().max(50),
@@ -21,7 +24,12 @@ signup.post(validate({ body: postSchema }), async (req, res) => {
 
     try{
         const user = await signupUser(req.body)
-        res.status(200).json( user )
+        req.session.user = {
+            id: user._id,
+            user: user.user
+        }
+        await req.session.save()
+        res.status(200).json( { ok: true} )
     }catch(error) {
         console.error(error)
         throw error
@@ -30,4 +38,4 @@ signup.post(validate({ body: postSchema }), async (req, res) => {
  })
 
 
-export default signup
+export default withIronSessionApiRoute(signup, ironConfig)
