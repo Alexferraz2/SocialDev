@@ -7,6 +7,7 @@ import H2 from "../src/components/typography/H2"
 import H4 from "../src/components/typography/H4"
 import Button from "../src/components/inputs/Button";
 import Input from "../src/components/inputs/Input";
+import { useState } from "react";
 
 const FormContainer = styled.div`
     margin-top: 60px
@@ -23,7 +24,20 @@ const Text = styled.p`
     
 `
 
+
+
 function Signup() {
+  
+    const [firstName, setFisrtName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+     
+    const handleForm = (event) => {
+        event.preventDefault()
+        console.log({firstName, lastName, email, password})
+    }
+    
     return (
         <ImageWithSpace>
             <H1># Social Dev</H1>
@@ -31,11 +45,11 @@ function Signup() {
             <FormContainer>
                 <H2>Crie sua conta</H2>
             </FormContainer>  
-            <Form>
-                <Input type="text" label="Nome"/> 
-                <Input type="text" label="Sobrenome"/> 
-                <Input type="email" label="Email"/>   
-                <Input type="password" label="Senha"/> 
+            <Form onSubmit={handleForm}>
+                <Input label="Nome" onChange={({target}) => {setFisrtName(target.value)}}/> 
+                <Input type="text" label="Sobrenome" onChange={({target}) => {setLastName(target.value)}}/> 
+                <Input type="email" label="Email" onChange={({target}) => {setEmail(target.value)}}/>   
+                <Input type="password" label="Senha" onChange={({target}) => {setPassword(target.value)}}/> 
                 <Button>Entrar</Button>
                 
             </Form>
