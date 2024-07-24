@@ -20,7 +20,13 @@ signup.post(validate({ body: signupSchema }), async (req, res) => {
         await req.session.save()
         res.status(200).json( { ok: true} )
     }catch(error) {
-        console.error(error)
+        if (error.code === 11000) {
+            return res.status(400).send({
+                code: 11000,
+                duplicatedKey: Object.keys(error.keyPattern)[0]
+            })
+            
+        }
         throw error
     }
     

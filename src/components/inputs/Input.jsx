@@ -38,6 +38,7 @@ const errorMessage = {
     'string.empty': 'O campo é obrigatório',
     'string.email': 'Digite um email válido',
     'string.min': 'O campo deve ter no mínimo seis caracteres',
+    'duplicated': 'Já existe uma conta resgistrada com esse valor'
 }
 
 
