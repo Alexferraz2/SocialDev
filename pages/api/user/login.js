@@ -13,7 +13,7 @@ import { loginSchema } from "../../../modules/user/user.Schema"
 const handler = creatHandler()
 
 handler.post(validate({body: loginSchema}), async (req, res) => {
-    try {
+    try {        
         const user = await login(req.body)
         req.session.user = {
             id: user._id,
@@ -21,7 +21,7 @@ handler.post(validate({body: loginSchema}), async (req, res) => {
         }
         await req.session.save()
         res.send({ ok: true })
-    } catch (error) {
+    } catch (error) {        
         return res.status(400).send(error.message)
         
     }

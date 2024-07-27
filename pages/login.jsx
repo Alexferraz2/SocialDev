@@ -39,9 +39,11 @@ function LoginPage() {
         try {
             const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
             if( status === 200) {
+                console.log(status)
                 router.push('/')
             }
         } catch ({ response }) {
+            
             if(response.data === 'Password is incorrect') {
                 setError('password', {
                     message: 'A senha está incorreta!'
