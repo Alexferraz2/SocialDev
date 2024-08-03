@@ -1,8 +1,12 @@
+
 import { createGlobalStyle, ThemeProvider } from "styled-components"
+import moment from 'moment'
+import 'moment/locale/pt-br'
 
 import Navbar from "../src/components/layout/NavBar"
 
 import theme from '../src/theme'
+import { useEffect } from "react"
 
 const GlobalStyle = createGlobalStyle `
 * {
@@ -32,6 +36,11 @@ a:hover{
 `
 
 function App ({ Component, pageProps }) {
+
+  useEffect(() => {
+    moment.locale('pt-br')
+  }, [])
+
   return (
 
     <ThemeProvider theme={theme}>
