@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import H4 from "../typography/H4"
-import TextArea from "../inputs/TextArea";
+import ControlledTextArea from "../inputs/ControlledTextArea";
 import Button from "../inputs/Button";
+import { useForm } from "react-hook-form"; 
+import { joiResolver } from "@hookform/resolvers/joi"; 
+import axios from 'axios'
+import { useSWRConfig } from "swr";
 
+import { creatPostSchema } from "../../../modules/post/post.Schema"
 
 const PostContainer = styled.div`
     background-color: ${props => props.theme.white};
@@ -39,17 +44,38 @@ const BottomText = styled.p`
 `
 
 function CreatPost({userName}){
+    const { mutate } = useSWRConfig()
+    const { control, handleSubmit, formState: { isValid, }, reset } = useForm({
+        resolver: joiResolver(creatPostSchema),
+        mode: 'all'
+    })
+
+    const onSubmit = async (data) => {
+       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, data)
+       if(response.status === 201) {
+        reset()
+        mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
+       }
+    }
     return(
         <PostContainer>
             <H4><Title>O que você está pensando, @{userName}?</Title></H4>
-            <TextContainer>
-                <TextArea placeholder="Digite sua mensagem" rows="4"/>
-            </TextContainer>
-            <BottomContainer>
-                <BottomText>A sua mensagem será publicada</BottomText>
-                <Button>Enviar mensagem</Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <TextContainer>
+                    <ControlledTextArea 
+                    placeholder="Digite sua mensagem" 
+                    rows="4" 
+                    control={control}
+                    name="text"
+                    maxLength="256"
+                    />
+                </TextContainer>
+                <BottomContainer>
+                    <BottomText>A sua mensagem será publicada</BottomText>
+                    <Button disabled={!isValid}>Enviar mensagem</Button>
 
-            </BottomContainer>
+                </BottomContainer>
+            </form>
         </PostContainer>
     )
 }

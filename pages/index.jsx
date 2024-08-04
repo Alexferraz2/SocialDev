@@ -21,10 +21,7 @@ const LastaPostText = styled(H3)`
   padding: 40px 0;
 `
 
-const RefreshPostsContainer = styled.div`
-  text-align: center
 
-`
  const RefreshPosts = styled.span `
   font-weight: bold;
   color: ${props => props.theme.primary};
@@ -54,10 +51,7 @@ function HomePage ( {user }) {
           <CreatPost userName={user.user}/>
 
           <LastaPostText>Últimas postagens:</LastaPostText>
-          <RefreshPostsContainer>
-            <RefreshPosts>Carregar novas postagens</RefreshPosts>
-                        
-          </RefreshPostsContainer>
+          
 
           <PostContainer>
            {
