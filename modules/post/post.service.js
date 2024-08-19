@@ -16,5 +16,11 @@ export const getPosts = async (Limit = 10) => {
 }
 
 
+export const deletePost = async (id, user) => {
+    return await Post.findeOneAndDelete({
+        _id: id,
+        createdBy: user.id
+    })
+} 
 
 

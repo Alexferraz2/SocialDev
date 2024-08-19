@@ -39,7 +39,7 @@ function LoginPage() {
         try {
             const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
             if( status === 200) {
-                console.log(status)
+                
                 router.push('/')
             }
         } catch ({ response }) {

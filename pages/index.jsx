@@ -61,6 +61,8 @@ function HomePage ( {user }) {
                 text={post.text}
                 user={post.createdBy.user}
                 date={post.createdBy.text}
+                isOwner= {post.createdBy._id === user.id}
+                id={post._id}
 
               />
             )
@@ -87,7 +89,7 @@ export const getServerSideProps = withIronSessionSsr(
         }
       }
     }
-    console.log(user)
+    
     return {
       props: {
         user
