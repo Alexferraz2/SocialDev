@@ -17,7 +17,7 @@ export const getPosts = async (Limit = 10) => {
 
 
 export const deletePost = async (id, user) => {
-    return await Post.findeOneAndDelete({
+    return await Post.findOneAndDelete({
         _id: id,
         createdBy: user.id
     })
