@@ -1,4 +1,5 @@
 import Joi from "joi"
+
 import joiObjectid from "joi-objectid"
 Joi.objectId = joiObjectid(Joi)
 
@@ -9,4 +10,9 @@ export const creatPostSchema = Joi.object({
 
 export const deletePostSchema = Joi.object({
     id: Joi.objectId().required()
+})
+
+export const editPostSchema = Joi.object({
+    id: Joi.objectId().required(),
+    text: Joi.string().required().max(256)
 })
