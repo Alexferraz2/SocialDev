@@ -1,4 +1,4 @@
-import { Children } from "react/cjs/react.production.min";
+
 import styled from "styled-components";
 
 const StyledButton = styled.button`
@@ -21,7 +21,7 @@ const StyledButton = styled.button`
     }
 `
 
-const Button = ({ Children, disabled, Loading,  ...props}) => {
+const Button = ({ children, disabled, Loading,  ...props}) => {
     return(
         <StyledButton
          disabled={disabled || Loading}         
@@ -29,7 +29,7 @@ const Button = ({ Children, disabled, Loading,  ...props}) => {
         
         >
             {Loading && <img src="./loading.svg" width="14px"/>}
-            {!Loading && Children}
+            {!Loading && children}
         </StyledButton>
     )
 }

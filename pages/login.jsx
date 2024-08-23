@@ -13,6 +13,7 @@ import H2 from "../src/components/typography/H2"
 import H4 from "../src/components/typography/H4"
 import Button from "../src/components/inputs/Button";
 import Input from "../src/components/inputs/Input";
+import { useState } from "react";
 
 const FormContainer = styled.div`
     margin-top: 60px
@@ -30,6 +31,7 @@ const Text = styled.p`
 `
 
 function LoginPage() {
+    const [showLoading, setShowLoading] = useState (false)
     const router = useRouter()
     const { control, handleSubmit, formState: { errors }, setError} = useForm({ 
         resolver: joiResolver(loginSchema)
@@ -37,11 +39,14 @@ function LoginPage() {
 
     const onSubmit = async (data) => {
         try {
+            
             const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
             if( status === 200) {
                 
                 router.push('/')
             }
+
+
         } catch ({ response }) {
             
             if(response.data === 'Password is incorrect') {
@@ -56,6 +61,7 @@ function LoginPage() {
             }
             
         }
+        setShowLoading(true)
     }
     return (
         <ImageWithSpace>
@@ -67,7 +73,7 @@ function LoginPage() {
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Input label="Email ou usuário" name="userOrEmail" control={control}/>   
                 <Input type="password" label="Senha" name="password" control={control}/> 
-                <Button Loading={true} type="submit" disabled={Object.keys(errors).length > 0}>Entrar</Button>
+                <Button Loading={showLoading} type="submit" disabled={Object.keys(errors).length > 0}>Entrar</Button>
                 
             </Form>
             <Text>Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link> </Text>       
