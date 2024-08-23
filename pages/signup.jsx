@@ -37,6 +37,7 @@ const Text = styled.p`
 
 
 function Signup() {
+    const [showLoading, setShowLoading] = useState (false)
     const router = useRouter()
     const { control, handleSubmit, formState: { errors }, setError} = useForm({ 
         resolver: joiResolver(signupSchema)
@@ -50,6 +51,7 @@ function Signup() {
             if(status === 200) {
                 router.push('/')
             }
+            setShowLoading(true)
         } catch (error) {
             if(error.response.data.code === 11000) {
                 setError(error.response.data.duplicatedKey, {
@@ -78,7 +80,7 @@ function Signup() {
                 <Input label="Usuário" name="user" control={control}/>
                 <Input type="email" label="Email" name="email" control={control}/>   
                 <Input type="password" label="Senha" name="password" control={control}/> 
-                <Button type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
+                <Button Loading={showLoading} type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
                  
             </Form>
             <Text>Já possui uma conta? <Link href="/login">Faça seu login</Link> </Text>       

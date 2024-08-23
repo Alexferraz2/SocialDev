@@ -2,10 +2,11 @@ import styled from "styled-components";
 import H4 from "../typography/H4"
 import ControlledTextArea from "../inputs/ControlledTextArea";
 import Button from "../inputs/Button";
-import { useForm } from "react-hook-form"; 
+import { set, useForm } from "react-hook-form"; 
 import { joiResolver } from "@hookform/resolvers/joi"; 
 import axios from 'axios'
 import { useSWRConfig } from "swr";
+import { useState } from "react";
 
 import { creatPostSchema } from "../../../modules/post/post.Schema"
 
@@ -44,6 +45,7 @@ const BottomText = styled.p`
 `
 
 function CreatPost({userName}){
+    const [showLoading, setShowLoading] = useState (false)
     const { mutate } = useSWRConfig()
     const { control, handleSubmit, formState: { isValid, }, reset } = useForm({
         resolver: joiResolver(creatPostSchema),
@@ -51,11 +53,13 @@ function CreatPost({userName}){
     })
 
     const onSubmit = async (data) => {
+        setShowLoading(true)
        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, data)
-       if(response.status === 201) {
+       if(response.status === 201) {        
         reset()
         mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
        }
+       setShowLoading(false)
     }
     return(
         <PostContainer>
@@ -72,7 +76,7 @@ function CreatPost({userName}){
                 </TextContainer>
                 <BottomContainer>
                     <BottomText>A sua mensagem será publicada</BottomText>
-                    <Button disabled={!isValid}>Enviar mensagem</Button>
+                    <Button Loading={showLoading} disabled={!isValid}>Enviar mensagem</Button>
 
                 </BottomContainer>
             </form>

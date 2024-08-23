@@ -46,7 +46,7 @@ function LoginPage() {
                 router.push('/')
             }
 
-
+            setShowLoading(true)
         } catch ({ response }) {
             
             if(response.data === 'Password is incorrect') {
@@ -61,7 +61,7 @@ function LoginPage() {
             }
             
         }
-        setShowLoading(true)
+        
     }
     return (
         <ImageWithSpace>
