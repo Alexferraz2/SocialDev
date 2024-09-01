@@ -46,12 +46,13 @@ function Signup() {
         
     const handleForm = async (data) => {
         try {
+            setShowLoading(true)
             const{ status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`, data)
             
             if(status === 200) {
                 router.push('/')
             }
-            setShowLoading(true)
+            
         } catch (error) {
             if(error.response.data.code === 11000) {
                 setError(error.response.data.duplicatedKey, {

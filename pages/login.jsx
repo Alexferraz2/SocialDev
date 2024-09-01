@@ -39,14 +39,14 @@ function LoginPage() {
 
     const onSubmit = async (data) => {
         try {
-            
+            setShowLoading(true)
             const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
             if( status === 200) {
                 
                 router.push('/')
             }
 
-            setShowLoading(true)
+            
         } catch ({ response }) {
             
             if(response.data === 'Password is incorrect') {
